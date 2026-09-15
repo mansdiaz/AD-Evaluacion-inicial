@@ -25,6 +25,10 @@ public class ProgramacionBasica {
         for (int i = numeros.length - 1;i>=0;i--){
            System.out.println("Posición " + i + ": " + numeros[i]);
        }
+        
+        System.out.println("\n\n");
+        Cliente hyenita = new Cliente();
+        System.out.println(hyenita.getId_cliente() + " " + hyenita.getDireccion());
     
     }
     
