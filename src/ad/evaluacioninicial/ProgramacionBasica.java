@@ -29,6 +29,8 @@ public class ProgramacionBasica {
         System.out.println("\n\n");
         Cliente hyenita = new Cliente();
         System.out.println(hyenita.getId_cliente() + " " + hyenita.getDireccion());
+        
+        hyenita.toString();
     
     }
     

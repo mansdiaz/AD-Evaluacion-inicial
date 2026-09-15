@@ -88,8 +88,13 @@ public class Cliente {
         this.puntuacion = puntuacion;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Cliente{" + "id_cliente=" + id_cliente + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", puntuacion=" + puntuacion + '}';
+    }
 
+    
+    
     
     
 }
