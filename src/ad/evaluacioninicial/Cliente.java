@@ -2,6 +2,8 @@ package ad.evaluacioninicial;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -38,6 +40,45 @@ public class Cliente {
         this.puntuacion = puntuacion;
     }
     
+    public void pedirDatos() {
+        Scanner teclado = new Scanner(System.in);
+        
+        System.out.print("ID: ");
+        id_cliente = teclado.nextInt();
+        teclado.nextLine();
+        
+        System.out.print("Nombre: ");
+        nombre = teclado.nextLine();
+        
+        System.out.print("Dirección: ");
+        direccion = teclado.nextLine();
+        
+        System.out.print("Teléfono: ");
+        telefono = teclado.nextLine();
+        
+        
+        System.out.print("Fecha de Nacimiento: ");
+        String fecha = teclado.nextLine();
+
+        try {  
+            fechaNacimiento = LocalDate.parse(fecha);
+
+        } catch (DateTimeParseException e) {
+
+             String[] parametrosFecha = fecha.split("/");
+
+            if (parametrosFecha.length == 3) {
+                fechaNacimiento = LocalDate.of(
+                  Integer.valueOf(parametrosFecha[2]),
+                  Integer.valueOf(parametrosFecha[1]),
+                  Integer.valueOf(parametrosFecha[0]));
+            }
+        }
+        
+        System.out.print("Puntuación: ");
+        puntuacion = teclado.nextInt();
+        teclado.nextLine();
+    }
     
 
     public int getId_cliente() {
@@ -90,7 +131,8 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id_cliente=" + id_cliente + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", puntuacion=" + puntuacion + '}';
+        System.out.println("Cliente{" + "id_cliente=" + id_cliente + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", puntuacion=" + puntuacion + '}');
+        return null;
     }
 
     
