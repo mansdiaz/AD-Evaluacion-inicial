@@ -1,12 +1,12 @@
 package ad.evaluacioninicial;
 
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -19,13 +19,15 @@ import java.util.Scanner;
  */
 public class Cliente {
 
-    private int id_cliente;
+    Scanner sc = new Scanner(System.in);
+
+    private Integer id_cliente;
     private String nombre;
     private String direccion;
     private String telefono;
     private LocalDate fechaNacimiento;
     private int puntuacion;
-    
+
     public Cliente() {
         id_cliente = -100;
         nombre = "";
@@ -43,47 +45,46 @@ public class Cliente {
         this.fechaNacimiento = fechaNacimiento;
         this.puntuacion = puntuacion;
     }
-    
+
     public void pedirDatos() {
+
         Scanner teclado = new Scanner(System.in);
-        
+
         System.out.print("ID: ");
         id_cliente = teclado.nextInt();
         teclado.nextLine();
-        
+
         System.out.print("Nombre: ");
         nombre = teclado.nextLine();
-        
+
         System.out.print("Dirección: ");
         direccion = teclado.nextLine();
-        
+
         System.out.print("Teléfono: ");
         telefono = teclado.nextLine();
-        
-        
+
         System.out.print("Fecha de Nacimiento: ");
         String fecha = teclado.nextLine();
 
-        try {  
+        try {
             fechaNacimiento = LocalDate.parse(fecha);
 
         } catch (DateTimeParseException e) {
 
-             String[] parametrosFecha = fecha.split("/");
+            String[] parametrosFecha = fecha.split("/");
 
             if (parametrosFecha.length == 3) {
                 fechaNacimiento = LocalDate.of(
-                  Integer.valueOf(parametrosFecha[2]),
-                  Integer.valueOf(parametrosFecha[1]),
-                  Integer.valueOf(parametrosFecha[0]));
+                        Integer.valueOf(parametrosFecha[2]),
+                        Integer.valueOf(parametrosFecha[1]),
+                        Integer.valueOf(parametrosFecha[0]));
             }
         }
-        
+
         System.out.print("Puntuación: ");
         puntuacion = teclado.nextInt();
         teclado.nextLine();
     }
-    
 
     public int getId_cliente() {
         return id_cliente;
@@ -135,27 +136,95 @@ public class Cliente {
 
     @Override
     public String toString() {
-        System.out.println("Cliente{" + "id_cliente=" + id_cliente + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", puntuacion=" + puntuacion + '}');
-        return null;
+
+        return "Cliente{"
+                + "id_cliente=" + id_cliente
+                + ", nombre=" + nombre
+                + ", direccion=" + direccion
+                + ", telefono=" + telefono
+                + ", fechaNacimiento=" + fechaNacimiento
+                + ", puntuacion=" + puntuacion
+                + '}';
     }
 
     public void guardarDatos() {
+
         try {
             FileWriter archivo = new FileWriter("cliente.txt", true);
             BufferedWriter bw = new BufferedWriter(archivo);
             PrintWriter pw = new PrintWriter(bw);
-            
+
             pw.println(this.toString() + "\n");
+
             pw.close();
-            
+
         } catch (IOException ex) {
             System.out.println("Error de entrada/salida");
         }
     }
-    
-    
-    
-    
-    
-    
+
+    public void menu(ArrayList<Cliente> clientes) {
+
+        int opcion = -1;
+
+        while (opcion != 0) {
+
+            System.out.println("0 - Salir");
+            System.out.println("1 - Añadir cliente");
+            System.out.println("2 - Mostrar cliente");
+            System.out.println("3 - Eliminar cliente");
+
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+
+                case 0 -> {
+                    System.out.println("Adiós");
+                }
+
+                case 1 -> {
+                    Cliente c = new Cliente();
+                    c.pedirDatos();
+                    clientes.add(c);
+                    c.guardarDatos();
+                }
+
+                case 2 -> {
+                    System.out.println(clientes.toString().replace(", ", "\n\n"));
+                }
+
+                case 3 -> {
+
+                    System.out.println("¿Que ID quieres eliminar?");
+
+                    Integer id = sc.nextInt();
+                    sc.nextLine();
+
+//                    for (Cliente c : clientes) {
+//                        System.out.println("Revisando cliente: " + c);
+//                        if (c.getId_cliente() == id) {
+//
+//                            clientes.remove(c);
+//                        }
+//                    }
+
+                    for (int i = 0; i < clientes.size(); i++) {
+
+                        System.out.println("Revisando cliente: " + i);
+
+                        if (clientes.get(i).getId_cliente() == id) {
+
+                            clientes.remove(i);
+                            break;
+                        }
+                    }
+                }
+
+                default -> {
+                    System.out.println("Opción inválida");
+                }
+            }
+        }
+    }
 }
