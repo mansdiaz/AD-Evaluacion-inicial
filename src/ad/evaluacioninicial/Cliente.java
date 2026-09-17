@@ -1,6 +1,10 @@
 package ad.evaluacioninicial;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -135,6 +139,21 @@ public class Cliente {
         return null;
     }
 
+    public void guardarDatos() {
+        try {
+            FileWriter archivo = new FileWriter("cliente.txt", true);
+            BufferedWriter bw = new BufferedWriter(archivo);
+            PrintWriter pw = new PrintWriter(bw);
+            
+            pw.println(this.toString() + "\n");
+            pw.close();
+            
+        } catch (IOException ex) {
+            System.out.println("Error de entrada/salida");
+        }
+    }
+    
+    
     
     
     

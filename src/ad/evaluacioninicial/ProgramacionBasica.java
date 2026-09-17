@@ -33,6 +33,9 @@ public class ProgramacionBasica {
         hyenita.pedirDatos();
         
         hyenita.toString();
+        hyenita.guardarDatos();
+        
+        
         
         
     }
