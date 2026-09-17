@@ -15,19 +15,26 @@ public class ProgramacionExcepciones {
     public static void main(String[] args){
     Scanner sc = new Scanner(System.in);
     int a = 0, b = 0;
-    double result;
+    double result = 0;
     try{
         System.out.println("Introduce el primer numero");
         a = sc.nextInt();
         sc.nextLine();
+        
         System.out.println("Introduce el segundo número");
         b = sc.nextInt();
         sc.nextLine();
-    } catch (InputMismatchException e){
-        System.err.println("\n" + "No puedes introducir un valor que no sea un número" + "\n");
-    }
+        
         
         result = a / b;
+        
+    } catch (InputMismatchException e){
+        System.err.println("\n" + "No puedes introducir un valor que no sea un número" + "\n");
+    } catch (ArithmeticException e){
+        System.err.println("\n" + "No puedes dividir entre 0" + "\n");
+    }
+        
+        
         
         System.out.println("Resultado: " + result);
         
