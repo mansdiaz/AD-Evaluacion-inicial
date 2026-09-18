@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -173,6 +174,7 @@ public class Cliente {
             System.out.println("1 - Añadir cliente");
             System.out.println("2 - Mostrar cliente");
             System.out.println("3 - Eliminar cliente");
+            System.out.println("4 - Cliente 100");
 
             opcion = sc.nextInt();
             sc.nextLine();
@@ -208,7 +210,6 @@ public class Cliente {
 //                            clientes.remove(c);
 //                        }
 //                    }
-
                     for (int i = 0; i < clientes.size(); i++) {
 
                         System.out.println("Revisando cliente: " + i);
@@ -220,11 +221,38 @@ public class Cliente {
                         }
                     }
                 }
+                case 4 -> {
+                    try {
+                        System.out.println("Cliente 100: " + clientes.get(100));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println("El cliente 100 no existe, solo hay: " + (clientes.size() - 1));
+                    }
+                }
 
                 default -> {
                     System.out.println("Opción inválida");
                 }
             }
+        }
+
+    }
+
+    public long diasVivo() {
+        try {
+            return ChronoUnit.DAYS.between(fechaNacimiento, LocalDate.now());
+        } catch (NullPointerException e) {
+            System.err.println("La fecha no existe");
+            return 0;
+        }
+
+    }
+
+    public Integer transformaTelefono() {
+        try {
+            return Integer.valueOf(this.telefono);
+        } catch (NumberFormatException e) {
+            System.err.println("Teléfono introducido con carácteres o fuera de rango");
+            return 0;
         }
     }
 }

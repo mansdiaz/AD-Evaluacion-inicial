@@ -22,3 +22,5 @@ Cliente{id_cliente=-100, nombre=, direccion=, telefono=+34, fechaNacimiento=2026
 
 Cliente{id_cliente=-100, nombre=, direccion=, telefono=+34, fechaNacimiento=2026-09-17, puntuacion=0}
 
+Cliente{id_cliente=-100, nombre=, direccion=, telefono=+34, fechaNacimiento=2026-09-18, puntuacion=0}
+
